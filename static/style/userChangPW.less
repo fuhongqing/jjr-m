@@ -1,0 +1,55 @@
+@import "commen";
+
+.content {
+  background: #ffffff;
+}
+
+.list-block {
+  color: #bcbcbc;
+  line-height: .8rem;
+  margin: 0;
+  ul {
+    background: transparent;
+  }
+  .item-input {
+    margin: 0;
+  }
+  .item-inner {
+    border-bottom: 1px solid #eee;
+    margin-top: .6rem;
+    padding: 0;
+    input {
+      padding-bottom: .35rem;
+      padding-top: 1.3rem;
+    }
+  }
+  input[type=tel], input[type=text] {
+    height: auto;
+    &::-webkit-input-placeholder {
+      color: #bcbcbc;
+      opacity: 1;
+      font-size: .7rem;
+    }
+  }
+}
+
+.get_redify {
+  border: none;
+  border-radius: 0;
+  color: @blueColor;
+  line-height: 1rem;
+  height: 1rem;
+  border-left: 1px solid @blueColor;
+  padding: 0rem .75rem;
+  margin-bottom: .35rem;
+  margin-top: 1.3rem;
+  font-size: .8rem;
+}
+
+.list-block li:last-child .item-inner {
+  border-bottom: 1px solid #eeeeee;
+}
+
+.bar .button.pull-right {
+  .bar-button-pull-right();
+}

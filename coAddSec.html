@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/coAddSec.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">新增分行</h1>
+        <button class="button pull-right" id="submit_add">
+            保存
+        </button>
+    </header>
+    <div class="content">
+        <div class="list-block" id="form">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">公司名称</div>
+                            <div class="item-input">
+                                <input readonly type="text" name="agencyName">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">分行名称</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="" autofocus name="memberBranchName">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">分行经理</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="" name="linkName">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">经理电话</div>
+                            <div class="item-input">
+                                <input type="tel" placeholder="" name="telphone">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">分行人数</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="" name="memberNo">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">详细地址</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="" name="address">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        var submit = true;
+        $("input[name=agencyName]").val(GetUrlParms().memberAgencyName);
+        $("#submit_add").on("click", function () {
+            if ($.trim($("input[name=memberBranchName]").val()) === "") {
+                $.toast("请输入分行名称");
+                return
+            }
+            if ($.trim($("input[name=linkName]").val()) === "") {
+                $.toast("请输入分行经理");
+                return
+            }
+            if (!isName($("input[name=linkName]").val())) {
+                $.toast("请输入正确的汉字姓名");
+                return
+            }
+            if ($.trim($("input[name=telphone]").val()) === "") {
+                $.toast("请输入经理电话");
+                return
+            }
+            if (!isPhoneNo($("input[name=telphone]").val())) {
+                $.toast("请输入正确的手机号");
+                return
+            }
+            if ($.trim($("input[name=memberNo]").val()) === "") {
+                $.toast("请输入分行人数");
+                return
+            }
+            if (!isNumber($("input[name=memberNo]").val())) {
+                $.toast("请输入正确的分行人数");
+                return
+            }
+            if ($.trim($("input[name=address]").val()) === "") {
+                $.toast("请输入详细地址");
+                return
+            }
+            var _data = {
+                agencyID: GetUrlParms().agencyID,
+                memberBranchName: $("input[name=memberBranchName]").val(),
+                linkName: $("input[name=linkName]").val(),
+                telphone: $("input[name=telphone]").val(),
+                memberNo: $("input[name=memberNo]").val(),
+                address: $("input[name=address]").val()
+            };
+            if (submit) {
+                $ajax("member/addPropertyAgency", _data, addPropertyAgency);
+                submit = false
+            }
+        });
+
+        function addPropertyAgency(data) {
+            if (data.status === 1) {
+                $.toast(data.msg);
+                goBack(2000)
+            } else {
+                $.toast(data.msg);
+                setTimeout(function () {
+                    submit = true
+                },2000)
+            }
+        }
+    })
+</script>
+</body>
+</html>

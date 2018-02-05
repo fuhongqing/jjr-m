@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/userChangName.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">姓名</h1>
+        <button class="button pull-right" id="submit">
+            完成
+        </button>
+    </header>
+    <div class="content">
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" name="user[name]" value="" autofocus>
+                            </div>
+                            <div class="item-after btn_clear">
+                                <img src="static/img/icon_clear@3x.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        $("input[name='user[name]']").attr("value", GetUrlParms().memberFullName).select();
+        $(".btn_clear").on("click", function () {
+            $("input[name='user[name]']").val("");
+        });
+        $("#submit").on("click", function () {
+            var _data = {
+                memberPID: GetUrlParms().memberPID,
+                type: 1,
+                fullName: $("input[name='user[name]']").val()
+            };
+            $ajax("member/updateMemberInfo", _data, updateMemberInfo);
+        });
+
+        function updateMemberInfo(data) {
+            if (data.status === 1) {
+                $.toast(data.msg);
+                goBack(2000)
+            }else{
+                $.toast(data.msg);
+            }
+        }
+    })
+</script>
+</body>
+</html>

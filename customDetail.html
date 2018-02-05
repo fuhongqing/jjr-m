@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>客户详情</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <!--<link rel="shortcut icon" href="/favicon.ico">-->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/custom/css/light7.min.css">
+    <link rel="stylesheet" href="static/custom/css/light7-swiper.min.css"/>
+    <link rel="stylesheet" href="static/custom/css/customDetail.css"/>
+</head>
+<body>
+<!-- 单个page ,第一个.page默认被展示-->
+<div class="page" id="customDetail">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav clear">
+        <img class="lf" src="static/custom/img/back_left.png" alt=""/>
+        <div>客户详情</div>
+    </header>
+    <!-- 这里是页面内容区 -->
+    <div class="content">
+        <div class="content-block">
+            <!--客户信息-->
+            <div class="customTitle grid-demo">
+                <div class="row">
+                    <div class="col-50 key">客户信息</div>
+                    <div class="col-50 text-right value" id="house">-</div>
+                </div>
+            </div>
+            <!--联系人信息-->
+            <ul id="contact" class="value">
+                <li><span>-</span><span>-</span></li>
+                <li>
+                    <span>-</span><span>-</span>
+                    <a href=""><img src="static/custom/img/phone.png" alt=""/></a>
+                </li>
+                <li><img src="static/custom/img/back_down.png" alt=""/></li>
+            </ul>
+            <!--业务进度-->
+            <div class="customTitle grid-demo" id="ywProgress">
+                <div class="row">
+                    <div class="col-70 key">
+                        <span>业务进度：</span>
+                        <span class="send">-</span>
+                    </div>
+                    <div class="col-30 text-right text">
+                        <span class="more">查看更多</span>
+                        <img src="static/custom/img/back_right_dark.png" alt=""/>
+                    </div>
+                </div>
+            </div>
+            <!--发佣详情-->
+            <ul id="sendDetail">
+                <li><span>原始佣金：</span><span>-</span></li>
+                <li><span>折佣：</span><span>-</span></li>
+                <li><span>佣金奖励：</span><span>-</span></li>
+                <li><span>提供发票：</span><span>-</span></li>
+                <li><span>应发佣金：</span><span>-</span></li>
+                <li class="isSended"><span>实发佣金：</span><span>-</span></li>
+                <li class="proof isSended"><span>出款凭证：</span><img class="pb-standalone" src="static/custom/img/print.png" alt=""/></li>
+            </ul>
+            <!--跟进信息-->
+            <div class="customTitle grid-demo">
+                <div class="row">
+                    <div class="col-50 key">跟进信息</div>
+                </div>
+            </div>
+            <div id="follow" class="grid-demo">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src="static/custom/js/jquery-3.2.1.min.js"></script>
+<script type='text/javascript' src='static/custom/js/light7.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/custom/js/light7-swiper.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="static/custom/js/customDetail.js"></script>
+</body>
+</html>

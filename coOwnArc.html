@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/coOwnArc.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">公司组织架构</h1>
+    </header>
+    <div class="content">
+        <div class="content-block-title J_block_title">公司法人</div>
+        <div class="list-block">
+            <ul id="getAgencyInfo1">
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">法人姓名</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">法人电话</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--userType为1时显示“新增按钮”-->
+        <div class="content-block-title J_block_title" id="J_data_fr">公司分行
+        </div>
+        <div class="list_block_group" id="getAgencyInfo2">
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        //获取公司组织架构信息
+        //userType 1 法人 2 非法人 require
+        //agencyID 公司ID  require
+        //branchID 分行ID [备注：userType=2时必选]
+        var _getAgencyInfo = {
+            userType: GetUrlParms().userType,
+            agencyID: GetUrlParms().agencyID,
+            branchID: GetUrlParms().branchID
+        };
+        var memberAgencyName = GetUrlParms().memberAgencyName;
+        //TODO  正常改为1
+        if (_getAgencyInfo.userType == "1") {
+            var str = `<a class="pull-right J_container_title_more" href="coAddSec.html?agencyID=${_getAgencyInfo.agencyID}&memberAgencyName=${memberAgencyName}" external>新增公司分行</a>`;
+            $("#J_data_fr").append(str)
+        }
+        $ajax("member/getAgencyInfo", _getAgencyInfo, getAgencyInfo);
+
+        function getAgencyInfo(data) {
+            if (data.status === 'success') {
+                // 基本信息
+                var dataStr = `<li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">法人姓名</div>
+                        <div class="item-after">${data.agencyInfo.memberFullName}</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">法人电话</div>
+                        <div class="item-after">${data.agencyInfo.memberMobilePhone}</div>
+                    </div>
+                </li>`;
+                $("#getAgencyInfo1").html(dataStr);
+                // 发佣账户
+                var _dataStr = [];
+                for (var i = 0, l = data.branchInfo.length; i < l; i++) {
+                    var _str = `<div class="list-block">
+                    <ul>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title"><span>${i + 1}</span>分行名称：</div>
+                                <div class="item-after">${data.branchInfo[i].AgencyName}</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">分行经理：</div>
+                                <div class="item-after">${data.branchInfo[i].LinkName}</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">分行经理电话：</div>
+                                <div class="item-after">${data.branchInfo[i].Telephone}</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">分行码：</div>
+                                <div class="item-after">${data.branchInfo[i].AgencyCode}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>`;
+                    _dataStr.push(_str)
+                }
+                _dataStr = _dataStr.join('');
+                $("#getAgencyInfo2").html(_dataStr)
+            }
+        }
+    })
+</script>
+</body>
+</html>

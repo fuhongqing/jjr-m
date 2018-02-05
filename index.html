@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/dist/light7/css/light7-swiper.min.css">
+    <link rel="stylesheet" href="static/style/index.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <nav class="bar bar-tab">
+        <button class="tab-item active" id="index" external onclick="home('home')">
+            <span class="tab_img"><img src="static/img/tag/icon_home_active@3x.png" alt=""></span>
+            <span class="tab-label">首页</span>
+        </button>
+        <button class="tab-item" id="custom" external onclick="kehu('kefu')">
+            <span class="tab_img"><img src="static/img/tag/icon_client@3x.png" alt=""></span>
+            <span class="tab-label">客户</span>
+        </button>
+        <button class="tab-item" id="userIndex" external onclick="wode('wode')">
+            <span class="tab_img"><img src="static/img/tag/icon_user@3x.png" alt=""></span>
+            <span class="tab-label">我的</span>
+        </button>
+    </nav>
+    <div class="content">
+        <div class="J_container J_index_yeji_all">
+            <!--//js专用类J_index_yeji_all_select-->
+            <div class="J_selectbox J_index_yeji_all_select">
+                <img class="icon_img" src="static/img/icon_achievement@3x.png" alt="">
+                <span class="select_box_span" data-name="name1" id="name1">累计业绩</span>
+            </div>
+            <div class="J_index_yeji_data text-center" id="getGradeInfo">
+                <p class="yeji_fyje">元<span>(发佣金额)</span></p>
+                <p class="yeji_fyts">套<span>(发佣套数)</span></p>
+                <div class="J_row_3">
+                    <div class="col_33">报备：<span class="yeji_bb"></span>组</div>
+                    <div class="col_33">来访：<span class="yeji_lf"></span>组</div>
+                    <div class="col_33">成交：<span class="yeji_cj"></span>套</div>
+                </div>
+            </div>
+        </div>
+        <div class="J_container J_index_yeji_line">
+            <div class="J_container_title">
+                两周业绩走势（报备/来访）
+            </div>
+            <div class="J_line" id="echart" style="width: 100%;height:9.8rem;margin-top: -1rem;">
+
+            </div>
+        </div>
+        <!--//js专用类yeji_all_select-->
+        <div class="J_container J_index_yeji_rank">
+            <div class="J_selectbox J_yeji_rank_select">
+                <img class="icon_img" src="static/img/icon_trophy@3x.png" alt="">
+                <span class="select_box_span" data-name="name2" id="name2">本周排行</span>
+            </div>
+            <div class="J_yeji_rank_data text-center no_vertical_padding" id="J_yeji_rank_data">
+                <div class="J_row_6">
+                    <div class="text-nowarp">排名</div>
+                    <div class="text-nowarp" id="getRankListName">分行</div>
+                    <div class="text-nowarp">报备</div>
+                    <div class="text-nowarp">带看</div>
+                    <div class="text-nowarp">成交</div>
+                    <div class="text-nowarp">发佣</div>
+                </div>
+                <div class="J_yeji_rank_data_list" id="getRankListInit"></div>
+                <div class="more_block"><img src="static/img/icon_down@3x.png" alt=""></div>
+            </div>
+        </div>
+        <div class="J_container J_index_yeji_tj">
+            <div class="J_container_title">
+                <img class="icon_img" src="static/img/icon_recommend@3x.png" alt="">项目推荐
+                <a external class="pull-right J_container_title_more" id="toIntemList">
+                    查看更多<img class="icon_arr" src="static/img/icon_right_black@3x.png" alt="">
+                </a>
+            </div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper" id="commendPropertyList"></div>
+            </div>
+        </div>
+    </div>
+    <div class="mask mask_J_index_yeji_all_select"></div>
+    <div class="mask mask_J_yeji_rank_select"></div>
+</div>
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7-swiper.min.js' charset='utf-8'></script>
+<script src="static/echarts.common.min.js"></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        // countType 查询时间：0为当天 1为昨天 2为本周 3为本月 4为本年 5为累计，默认累计.
+        $(document).on('click', '#name1', function () {
+            var _this = this;
+            var buttons1 = [
+                {
+                    text: '今日',
+                    onClick: function () {
+                        $(_this).html("今日");
+                        getGradeInfoInit(0)
+                    }
+                },
+                {
+                    text: '昨日',
+                    onClick: function () {
+                        $(_this).html("昨日");
+                        getGradeInfoInit(1)
+                    }
+                },
+                {
+                    text: '本周',
+                    onClick: function () {
+                        $(_this).html("本周");
+                        getGradeInfoInit(2)
+                    }
+                },
+                {
+                    text: '本月',
+                    onClick: function () {
+                        $(_this).html("本月");
+                        getGradeInfoInit(3)
+                    }
+                },
+                {
+                    text: '本年',
+                    onClick: function () {
+                        $(_this).html("本年");
+                        getGradeInfoInit(4)
+                    }
+                },
+                {
+                    text: '累计业绩',
+                    onClick: function () {
+                        $(_this).html("累计业绩");
+                        getGradeInfoInit(5)
+                    }
+                }
+            ];
+            var groups = [buttons1];
+            $.actions(groups);
+        });
+        $(document).on('click', '#name2', function () {
+            var _this = this;
+            var buttons2 = [
+                {
+                    text: '本周排行',
+                    onClick: function () {
+                        $(_this).html("本周排行");
+                        getRankListInit(2)
+                    }
+                },
+                {
+                    text: '本月排行',
+                    onClick: function () {
+                        $(_this).html("本月排行");
+                        getRankListInit(3)
+                    }
+                },
+                {
+                    text: '本年排行',
+                    onClick: function () {
+                        $(_this).html("本年排行");
+                        getRankListInit(4)
+                    }
+                },
+                {
+                    text: '累计业绩',
+                    onClick: function () {
+                        $(_this).html("累计业绩");
+                        getRankListInit(5)
+                    }
+                }
+            ];
+            var groups = [buttons2];
+            $.actions(groups);
+        });
+        //**********************业绩列表ui**********************
+        $("#J_yeji_rank_data").on("click", ".more_block", function () {
+            $(this).toggleClass("active");
+            $(".J_yeji_rank_data_list").toggleClass("active")
+        });
+        // userType  用户类型：1为法人，2为分行经理
+        // agencyID  用户类型为1时传公司id，用户类型为2传分行id
+        //TODO 从URL中获取 userType agencyID  链接中有数据则从链接中获取，没有从本地获取
+        if (GetUrlParms2()) {
+            //链接中有数据 存储数据  //没有数据证明不是从APP中跳转过来的
+            localStorage.setItem("userType", GetUrlParms2()[0]);
+            localStorage.setItem("agencyID", GetUrlParms2()[1]);
+            localStorage.setItem("branchID", GetUrlParms2()[2]);
+            localStorage.setItem("memberPID", GetUrlParms2()[3]);
+        }
+
+        //业绩统计
+        function getGradeInfoInit(countType) {
+            $ajax("indexPag/getGradeInfo", {
+                    userType: localStorage.getItem("userType"),
+                    agencyID: localStorage.getItem("userType") === "1" ? localStorage.getItem("agencyID") : localStorage.getItem("branchID"),
+                    countType: countType
+                },
+                getGradeInfo
+            )
+        }
+
+        getGradeInfoInit(5);
+
+        function getGradeInfo(data) {
+            if (data.status === "success") {
+                var _dataStr = `<p class="yeji_fyje">${data.data[0].commission}元<span>(发佣金额)</span></p>
+                            <p class="yeji_fyts">${data.data[0].commissionHouse}套<span>(发佣套数)</span></p>
+                            <div class="J_row_3">
+                                <div class="col_33">报备：<span class="yeji_bb">${data.data[0].customerReport}</span>组</div>
+                                <div class="col_33">来访：<span class="yeji_lf">${data.data[0].lookCustomer}</span>组</div>
+                                <div class="col_33">成交：<span class="yeji_cj">${data.data[0].saleHouseCount}</span>套</div>
+                            </div>`;
+                $("#getGradeInfo").html(_dataStr);
+            } else if (data.status === "no_data") {
+                var _dataStr = `<p class="yeji_fyje">0元<span>(发佣金额)</span></p>
+                            <p class="yeji_fyts">0套<span>(发佣套数)</span></p>
+                            <div class="J_row_3">
+                                <div class="col_33">报备：<span class="yeji_bb">0</span>组</div>
+                                <div class="col_33">来访：<span class="yeji_lf">0</span>组</div>
+                                <div class="col_33">成交：<span class="yeji_cj">0</span>套</div>
+                            </div>`;
+                $("#getGradeInfo").html(_dataStr);
+            }
+        }
+
+        localStorage.getItem("userType") === "1" ? "" : $("#getRankListName").html("员工");
+
+        //k-line
+        $ajax("indexPag/getGradeTrend", {
+            userType: localStorage.getItem("userType"),
+            agencyID: localStorage.getItem("userType") === "1" ? localStorage.getItem("agencyID") : localStorage.getItem("branchID")
+        }, getGradeTrend);
+
+        function getGradeTrend(data) {
+            if (data.status === 'success') {
+                var _dataArr1 = [], _dataArr2 = [], _datDate = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+                $.each(data.data.reportCustomerList, function (index, ele) {
+                    _dataArr1.push(ele["customerReport"])
+                });
+                $.each(data.data.customerLookList, function (index, ele) {
+                    _dataArr2.push(ele["lookCustomer"])
+                });
+                var myChart = echarts.init(document.getElementById('echart'));
+                var option = {
+                    title: {},
+                    tooltip: {
+                        trigger: 'axis',
+                    },
+                    legend: {
+                        data: ['报备', '来访'],
+                        left: "left",
+                        top: 24,
+                        itemWidth: 6,
+                        itemHeight: 6,
+                        textStyle: {
+                            color: "#9A9A9A",
+                            fontSize: 9
+                        }
+                    },
+                    toolbox: {
+                        show: false,
+                    },
+                    calculable: true,
+                    xAxis: [
+                        {
+                            show: true,
+                            type: 'category',
+                            boundaryGap: false,
+                            data: _datDate,
+                            name: '时间/天',
+                            nameLocation: 'end',
+                            nameTextStyle: {
+                                color: '#9A9A9A',
+                                fontSize: 9,
+                                verticalAlign: 'bottom'
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#9a9a9a',
+                                }
+                            },
+                            splitLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: '#eeeeee',
+                                    width: 1
+                                }
+                            },
+                            nameGap: 3,
+                            axisLabel: {
+                                interval: 1
+                            },
+                            axisTick: {
+                                show: false
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            name: '数量/组',
+                            nameLocation: 'end',
+                            type: 'value',
+                            nameTextStyle: {
+                                color: '#9A9A9A',
+                                fontSize: 9
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#9a9a9a',
+                                }
+                            },
+                            splitLine: {
+                                lineStyle: {
+                                    color: '#eeeeee',
+                                    width: 1
+                                }
+                            },
+                            nameGap: 5,
+                            axisTick: {
+                                show: false
+                            }
+                        },
+
+                    ],
+                    series: [
+                        {
+                            name: '报备',
+                            type: 'line',
+                            smooth: true,
+                            data: _dataArr1,
+                            symbol: "none",
+                            itemStyle: {
+                                normal: {
+                                    color: "#2ec7c9",
+                                    lineStyle: {
+                                        color: "#48CFAD",
+                                        width: 1
+                                    }
+                                }
+                            },
+                        }, {
+                            name: '来访',
+                            type: 'line',
+                            smooth: true,
+                            data: _dataArr2,
+                            symbol: "none",
+                            itemStyle: {
+                                normal: {
+                                    color: "#2ec7c9",
+                                    lineStyle: {
+                                        color: "#DBE0E6",
+                                        width: 1
+                                    }
+                                }
+                            },
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+            } else if (data.status === "no_data") {
+                document.getElementById('echart').innerHTML = "<p style='text-align: center;line-height: 9rem;font-size: .7rem;color: #666'>暂无数据</p>"
+            }
+        }
+
+        // 业绩排行列表
+        // countType 查询时间：0为当天 1为昨天 2为本周 3为本月 4为本年 5为累计，默认累计.
+        // firstIndex 当前第几页。默认1，表示第一页
+        // pageSize
+        function getRankListInit(countType) {
+            $ajax("indexPag/getRankList", {
+                userType: localStorage.getItem("userType"),
+                agencyID: localStorage.getItem("userType") === "1" ? localStorage.getItem("agencyID") : localStorage.getItem("branchID"),
+                countType: countType
+            }, getRankList);
+        }
+
+        getRankListInit(5);
+
+        function getRankList(data) {
+            if (data.status === "success") {
+                var dataStr = [];
+                for (var i = 0, l = data.data.length; i < l; i++) {
+                    var _dataStr = `<div class="J_row_6">
+                        <div class="text-nowarp">TOP${data.data[i].rankingNO}</div>
+                        <div class="text-nowarp">${data.data[i].name}</div>
+                        <div class="text-nowarp">${data.data[i].customerReport}</div>
+                        <div class="text-nowarp">${data.data[i].lookCustomer}</div>
+                        <div class="text-nowarp">${data.data[i].saleHouseCount}</div>
+                        <div class="text-nowarp">${data.data[i].commissionHouse}</div>
+                    </div>`;
+                    dataStr.push(_dataStr);
+                }
+                dataStr = dataStr.join("");
+
+                $("#getRankListInit").html(dataStr);
+            }
+        }
+
+        //项目推荐
+        //agencyID
+        $ajax("indexPag/commendPropertyList", {agencyID: localStorage.getItem("agencyID")}, commendPropertyList);
+
+        function commendPropertyList(data) {
+            if (data.status === "success") {
+                var dataStr = [];
+                for (var i = 0, l = data.data.length; i < l; i++) {
+                    var _dataStr = `<a class="swiper-slide" href="pro.html?propertyID=${data.data[i].propertyID}" external>
+                                        <div class="card J_yeji_tj_list_card J_rel" style="overflow: hidden;">
+                                            <div valign="bottom" class="card-header color-white no-padding ">
+                                                <img class='card-cover' src="${data.data[i].mainPic}?imageView2/2/h/100" style="width: 7rem;height: 6rem" />
+                                                <span class="card-title J_rel_pos">${data.data[i].propertyName}</span>
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="card-content-inner">
+                                                    <p>佣&nbsp;·&nbsp;<span>${data.data[i].commissionMoney}</span>万元/套</p>
+                                                    <p><span>${data.data[i].averagePrice}</span>元/㎡&nbsp;起</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>`;
+                    dataStr.push(_dataStr);
+                }
+                dataStr = dataStr.join("");
+                $("#commendPropertyList").html(dataStr);
+                $(".swiper-container").swiper({
+                    slidesPerView: 2.4
+                });
+            } else if (data.status === "no_data") {
+                //沒有推薦内容直接隱藏整個模塊
+                // $(".J_index_yeji_tj").hide();
+            } else {
+                console.log(data.info)
+            }
+        }
+
+        // 部分字段未启用 位置：card-header
+        // <span class="J_rel_pos">
+        // ${data.data[i].lookSet === 0 ? "" : "<img class='icon_lable' src='static/img/icon_lable_dk@3x.png' />"}
+        // ${data.data[i].dealSet === 0 ? "" : "<img src='static/img/icon_lable_cj@3x.png' class='icon_lable' />"}
+        // </span>
+
+        //查看更多项目
+        $("#toIntemList").on("click", function () {
+            //拼接 公司id agencyID
+            window.location.href = "itemList.html?agencyID=" + localStorage.getItem("agencyID")
+        });
+        $("#index").on("click", function () {
+            window.location.href = "index.html"
+        });
+        $("#custom").on("click", function () {
+            window.location.href = "custom.html"
+        });
+        $("#userIndex").on("click", function () {
+            window.location.href = "userIndex.html"
+        });
+        $.init();
+    })
+</script>
+</body>
+</html>

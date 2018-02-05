@@ -1,0 +1,269 @@
+@import "varities";
+@import "../styleR/index";
+
+p {
+  margin: 0;
+}
+
+ul, menu, dir {
+  -webkit-padding-start: 0;
+}
+
+//自用样式以下划线命名
+//单行超出隐藏
+.text-nowarp() {
+  overflow-x: auto;
+  text-align: left;
+  //text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.J_rel() {
+  position: relative;
+  .J_rel_pos(@vertical:left;@horizontal:top) {
+    position: absolute;
+      @{vertical}: 0;
+      @{horizontal}: 0;
+  }
+}
+
+//自定义J_container
+.J_container {
+  background: #ffffff;
+  padding-left: @containerPadding;
+  padding-right: @containerPadding;
+  margin-bottom: @containerPadding;
+  &.padding_bottom_0 {
+    padding-bottom: 0;
+  }
+  .no_vertical_padding {
+    margin-left: -@containerPadding;
+    margin-right: -@containerPadding;
+  }
+}
+
+//J_container_title
+.J_container_title {
+  font-size: .7rem;
+  color: @defaultColor;
+  padding-top: .51rem;
+  &_more {
+    color: #999999;
+  }
+}
+
+//select 基础样式
+.J_selectbox() {
+  text-align: center;
+  font-size: .7rem;
+  line-height: 1.5rem;
+  padding-right: 0.01rem;
+  padding-bottom: .5rem;
+  .display_flex(flex-start);
+  span {
+    width: 10.9rem;
+    background: #F7F7F7;
+    border-radius: 0.75rem;
+    position: relative;
+    display: inline-block;
+    color: #3D3D3D;
+    letter-spacing: 0;
+    &::before {
+      content: '';
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-left: .2rem solid transparent;
+      border-right: .2rem solid transparent;
+      border-bottom: .2rem solid transparent;
+      border-top: .2rem solid @blueColor;
+      right: 1.4rem;
+      top: .7rem;
+      transform: rotateX(0deg);
+    }
+  }
+}
+
+//J_container_title over
+//flex
+.display_flex(@justify) {
+  display: flex;
+  justify-content: @justify;
+  align-items: center;
+  > div {
+    flex: 0 1 auto;
+  }
+}
+
+//light7列表跳转需求  将div改为a
+a.item-inner {
+  color: @defaultColor;
+}
+
+//栅格
+.J_row() {
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+  &:after {
+    clear: both;
+  }
+  .col(@percent) {
+    width: @percent;
+    float: left;
+  }
+}
+
+.icon_img {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-right: .75rem;
+  vertical-align: middle;
+}
+
+.icon_arr {
+  width: .3rem;
+  height: .5rem;
+  margin-left: .5rem;
+}
+
+.icon_lable {
+  width: 3rem;
+  height: 1rem;
+}
+
+.icon_next {
+  width: .36rem;
+  height: .6rem;
+}
+
+.icon_list {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.J_list {
+  margin-top: .75rem;
+  margin-bottom: 0;
+  font-size: .7rem;
+}
+
+.to_copy_btn {
+  color: @blueColor;
+  margin-left: 1rem;
+}
+
+.item-after_img {
+  width: 4.8rem;
+  height: 4.8rem;
+}
+
+.search-input input {
+  background: #eeeeee;
+  border-radius: .1rem;
+  &::-webkit-input-placeholder {
+    color: #bcbcbc;
+    opacity: 1;
+    font-size: .7rem;
+  }
+}
+
+.search-input .icon {
+  color: #bcbcbc;
+  font-size: .7rem;
+}
+
+.select_box_ul {
+  width: 13.8rem;
+  background: #ffffff;
+  line-height: 2.2rem;
+  border-radius: .25rem;
+  position: absolute;
+  left: 50%;
+  top: calc((100% - 2.5rem) / 2);
+  transform: translate(calc(-(100% - 2.5rem) / 2), -50%);
+  overflow: hidden;
+  label {
+    .display_flex(space-between);
+    height: 2.2rem;
+    line-height: 2.2rem;
+    padding: 0 .75rem 0 1.25rem;
+    background: #f7f7f7;
+    cursor: pointer;
+  }
+  .value_title {
+    color: #3d3d3d;
+  }
+  input[type=radio] {;
+    display: none;
+    &:checked + label {
+      background: #ffffff;
+      .value_title {
+        color: #3d3d3d;
+        & + .value_img img {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  img {
+    display: none;
+    height: .7rem;
+  }
+}
+
+.bar-tab .tab-item {
+  line-height: 0;
+  width: 33.3%;
+  border: none;
+  outline: none;
+  background: none;
+  float: left;
+  .tab_img {
+    display: block;
+    text-align: center;
+    img {
+      width: 2.1rem;
+      height: 1.5rem;
+      vertical-align: middle;
+    }
+  }
+  .tab-label {
+    display: inline-block;
+    font-size: 10px;
+    color: #a4a4a4;
+    line-height: .7rem;
+  }
+  &.active .tab-label {
+    color: #333;
+  }
+}
+
+.bar-button-pull-right() {
+  border: none;
+  color: #3d3d3d;
+  font-size: .8rem;
+}
+
+.bar-tab {
+  background: #ffffff;
+}
+
+.bar .button-nav.pull-left {
+  width: 6rem;
+  text-align: left;
+  padding-left: .25rem;
+  img {
+    width: .45rem;
+    vertical-align: middle;
+    height: .75rem;
+  }
+}
+
+.cant-click {
+  pointer-events: none;
+  color: #999999 !important;
+}

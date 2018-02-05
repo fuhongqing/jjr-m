@@ -1,0 +1,43 @@
+@import "commen";
+
+.list-block {
+  font-size: .7rem;
+  margin-top: .75rem;
+  padding-bottom: 1rem;
+  background: #ffffff;
+  .item-content {
+    padding-right: .75rem;
+  }
+  .item-inner {
+    line-height: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: .25rem;
+  }
+}
+
+.list-block .item-title.label {
+  margin: 0;
+  padding-top: .9rem;
+  padding-bottom: .25rem;
+  color:#333333;
+}
+
+.list-block input[type=text], .list-block input[type=number], .list-block input[type=tel] {
+  height: auto;
+  text-align: right;
+  padding-top: .9rem;
+  padding-bottom: .25rem;
+  &::-webkit-input-placeholder {
+    color: #bcbcbc;
+    opacity: 1;
+    font-size: .7rem;
+  }
+}
+.list-block li:last-child .item-inner{
+  border-bottom: 1px solid #eeeeee;
+}
+
+.bar .button.pull-right {
+  .bar-button-pull-right();
+}

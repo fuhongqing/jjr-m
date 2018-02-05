@@ -1,0 +1,101 @@
+{
+	"index.html": {
+		"refer": [
+			"userIndex.html",
+			"itemList.html",
+			"userChangPhone.html"
+		]
+	},
+	"userIndex.html": {
+		"refer": [
+			"userOwnData.html",
+			"staffManage.html",
+			"userSetting.html",
+			"userChangPhone.html",
+			"index.html",
+			"coOwnData.html",
+			"coOwnArc.html"
+		]
+	},
+	"userOwnData.html": {
+		"refer": [
+			"userChangName.html",
+			"userChangSex.html",
+			"userChangPhone.html",
+			"userIndex.html"
+		]
+	},
+	"userChangName.html": {
+		"refer": [
+			"userOwnData.html"
+		]
+	},
+	"userChangPhone.html": {
+		"refer": [
+			"userOwnData.html",
+			"userIndex.html",
+			"index.html"
+		]
+	},
+	"userChangSex.html": {
+		"refer": [
+			"userOwnData.html"
+		]
+	},
+	"staffManage.html": {
+		"refer": [
+			"userIndex.html",
+			"staffOwnData.html",
+			"staffManage.html"
+		]
+	},
+	"userSetting.html": {
+		"refer": [
+			"userChangPW.html",
+			"userChangPWone.html",
+			"userIndex.html"
+		]
+	},
+	"userChangPW.html": {
+		"refer": [
+			"userSetting.html"
+		]
+	},
+	"itemList.html": {
+		"refer": [
+			"index.html",
+			"pro.html"
+		]
+	},
+	"coOwnData.html": {
+		"refer": [
+			"userIndex.html"
+		]
+	},
+	"coOwnArc.html": {
+		"refer": [
+			"coAddSec.html",
+			"userIndex.html"
+		]
+	},
+	"coAddSec.html": {
+		"refer": [
+			"coOwnArc.html"
+		]
+	},
+	"pro.html": {
+		"refer": [
+			"itemList.html"
+		]
+	},
+	"staffOwnData.html": {
+		"refer": [
+			"staffManage.html"
+		]
+	},
+	"userChangPWone.html": {
+		"refer": [
+			"userSetting.html"
+		]
+	}
+}

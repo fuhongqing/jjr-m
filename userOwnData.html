@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人资料</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/userOwnData.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">个人资料</h1>
+    </header>
+    <div class="content">
+        <div class="J_userOwnData_user J_container">
+            <div class="J_userOwnData_user_warp">
+                <div class="">头像</div>
+                <div class="J_userOwnData_user_avter">
+                    <img src="static/img/icon_my@3x.png">
+                </div>
+            </div>
+        </div>
+        <div class="list-block J_list" id="getLoginUserBaseInfo1">
+            <ul>
+                <li class="item-content">
+                    <a class="item-inner" external>
+                        <div class="item-title">真实姓名</div>
+                        <div class="item-after"><img src="static/img/icon_right_black@3x.png" alt=""></div>
+                    </a>
+                </li>
+                <li class="item-content">
+                    <a class="item-inner" external>
+                        <div class="item-title">性别</div>
+                        <div class="item-after"><img src="static/img/icon_right_black@3x.png" alt=""></div>
+                    </a>
+                </li>
+                <li class="item-content">
+                    <a class="item-inner" external>
+                        <div class="item-title">手机号码</div>
+                        <div class="item-after"><img src="static/img/icon_right_black@3x.png" alt=""></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="list-block J_list">
+            <ul id="getLoginUserBaseInfo2">
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">所在公司</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">公司职位</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/dist/clipboard.min.js"></script>
+<script src="static/dist/clipboard-polyfill.js"></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        // 复制分行码
+        copy(".to_copy_btn");
+
+        // 获取个人资料
+        //http://xx.com/efangmem/member/getLoginUserBaseInfo
+        //userType 1 法人 2 非法人 require
+        //agencyID 公司ID  require
+        //memberPID 用户ID require [备注 : userType=2时必选]  测试type=3需要参数
+        var _data = {
+            userType: GetUrlParms().userType,
+            agencyID: GetUrlParms().agencyID,
+            memberPID: GetUrlParms().memberPID,
+            branchID: GetUrlParms().branchID
+        };
+        $ajax("member/getLoginUserBaseInfo", _data, getLoginUserBaseInfo);
+
+        function getLoginUserBaseInfo(data) {
+            if (data.status === 'success') {
+                var dataStr = `<div class="list-block J_list">
+                <ul>
+                    <li class="item-content">
+                        <a class="item-inner" external href="userChangName.html?memberFullName=${data.memberFullName}&memberPID=${_data.memberPID}">
+                            <div class="item-title">真实姓名</div>
+                            <div class="item-after">${data.memberFullName}<img src="static/img/icon_right_black@3x.png" alt=""></div>
+                        </a>
+                    </li>
+                    <li class="item-content">
+                        <a class="item-inner" external href="userChangSex.html?memberSex=${data.memberSex}&memberPID=${_data.memberPID}">
+                            <div class="item-title">性别</div>
+                            <div class="item-after">${data.memberSex === 1 ? "男" : data.memberSex === 2 ? "女" : "无"}<img src="static/img/icon_right_black@3x.png" alt=""></div>
+                        </a>
+                    </li>
+                    <li class="item-content">
+                        <a class="item-inner" external href="userChangPhone.html?memberMobilePhone=${data.memberMobilePhone}&memberPID=${_data.memberPID}">
+                            <div class="item-title">手机号码</div>
+                            <div class="item-after">${data.memberMobilePhone}<img src="static/img/icon_right_black@3x.png" alt=""></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>`;
+                var memberUserType = caseMemberUserType(data.memberUserType);
+                var _dataStr = `<li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">所在公司</div>
+                            <div class="item-after">${data.memberAgencyName}</div>
+                        </div>
+                    </li>
+                    <li class="item-content" style="${data.memberUserType === 100 ? "display:none" : ""}">
+                        <div class="item-inner">
+                            <div class="item-title">所在分行</div>
+                            <div class="item-after">${data.memberUserType === 100 ? "" : data.memberBranchName}</div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">公司职位</div>
+                            <div class="item-after">${memberUserType ? "memberUserType" : "未设置"}</div>
+                        </div>
+                    </li>
+                    <li class="item-content" style="${data.memberUserType === 100 ? "display:none" : ""}">
+                        <div class="item-inner">
+                            <div class="item-title">分行码</div>
+                            <div class="item-after">${data.memberUserType === 100 ? "" : data.agencyCode}
+                            ${memberUserType === 100 ? "" : `<span class="to_copy_btn" data-clipboard-text="${data.agencyCode}">复制</span>`}
+                            </div>
+                        </div>
+                    </li>`;
+                $("#getLoginUserBaseInfo1").html(dataStr);
+                $("#getLoginUserBaseInfo2").html(_dataStr);
+            } else {
+                $.toast(data.msg)
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+/*样式重置*/
+body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,p{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.lf{
+    float: left;
+}
+.gt{
+    float: right;
+}
+.clear:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*图片*/
+img{
+    vertical-align: middle;
+}
+/*页面内容背景白色*/
+.page{
+    background: #F7F7F7;
+}
+/*页面内容区*/
+.page>.content{
+    position: static;
+    height: 6.17rem;
+    overflow: auto;
+}
+.content-block{
+    margin-top: .64rem;
+    margin-bottom: .49rem;
+    padding: 0 .16rem 0 .19rem;
+}
+/*重置栅格样式*/
+.grid-demo>.row{
+    margin: 0;
+}
+.grid-demo>.row>div{
+    margin: 0;
+}
+/*头部*/
+#progress>header{
+    height: .44rem;
+    background: #fff;
+    padding: 0;
+}
+#progress>header>img{
+    margin-top: .12rem;
+    margin-left: .22rem;
+}
+#progress>header>div{
+    line-height: .43rem;
+    font-size: 17px;
+    color: #3D3D3D;
+    text-align: center;
+}
+/*内容区*/
+/*进程*/
+#progressItems{
+    width: 88%;
+    margin-top: .15rem;
+}
+/*出款凭证*/
+#progressItems .proof{
+    color: #7E7E7E;
+    margin-bottom: .1rem;
+}
+#progressItems ul{
+    height: 3.7rem;
+    overflow: auto;
+}
+#progressItems ul.signBar{
+    height: 3.5rem;
+}
+#progressItems ul.achievedBar{
+    height: 4rem;
+}
+#progressItems ul.visitBar{
+    height: 4.48rem;
+}
+#progressItems ul.reportBar{
+    height: 3.5rem
+}
+/*进程头部条*/
+.progressBar{
+    background: #FD7575;
+    border-radius: 4px 4px 0 0;
+    height: .33rem;
+    line-height: .33rem;
+    color:#fff;
+    padding-left:.15rem;
+}
+.progressBar>span:first-child{
+    margin-right: .17rem;
+}
+/*签约*/
+#progressItems .sign{
+    background: #FF8051;
+}
+/*大定*/
+#progressItems .achieved{
+    background: #B0E8FB;
+}
+/*1访*/
+#progressItems .visit{
+    background: #759CEA;
+}
+#progressItems .visit>span:first-child{
+    margin-right: .39rem;
+}
+/*报备*/
+#progressItems .report{
+    background: #48CFAD;
+}
+/*备注*/
+#progressItems .remark{
+    font-size: 12px;
+    color: #888888;
+    border-top: .01rem solid #D8D8D8;
+    padding-top: .1rem;
+}
+.progressContent{
+    padding: .21rem .15rem .05rem .15rem;
+    background: #fff;
+    margin-bottom: .16rem;
+}
+.progressContent>li{
+    margin-bottom: .15rem;
+    font-size: 13px;
+    color: #666666;
+}
+.progressContent>li>img{
+    width: .96rem;
+    height: .96rem;
+}
+.progressContent>li>span:first-child{
+    display: inline-block;
+    width: .92rem;
+}
+/*步骤条*/
+#steps{
+    padding-top: .25rem;
+}
+.circle{
+    display:block;
+    width: .14rem;
+    height: .14rem;
+    border-radius: 50%;
+    background: #FD7575;
+}
+.line{
+    display:block;
+    height: 4.05rem;
+    border: .01rem solid transparent;
+    border-left-color:#FD7575;
+    margin-left: .06rem;
+}
+/*签约*/
+.sign>.circle{
+    background: #FF8051;
+}
+.sign>.line{
+    border-left-color:#FF8051;
+    height: 3.85rem;
+}
+/*大定*/
+.achieved>.circle{
+    background: #B0E8FB;
+}
+.achieved>.line{
+    height: 4.35rem;
+    border-left-color:#B0E8FB;
+}
+/*1访*/
+.visit>.circle{
+    background: #759CEA;
+}
+.visit>.line{
+    border-left-color:#759CEA;
+    height: 4.82rem;
+}
+/*报备*/
+.report>.circle{
+    background: #48CFAD;
+}
+/*图片浏览器*/
+.bar-nav{
+    height: .44rem;
+    line-height: .35rem;
+}
+/*.bar-nav .icon-left{*/
+    /*line-height: .44rem;*/
+    /*padding: 0;*/
+/*}*/
+/*.photo-browser .title{*/
+    /*font-size: 20px;*/
+    /*line-height: .44rem;*/
+/*}*/
+/*.icon-left:before {*/
+    /*font-size: 20px;*/
+    /*bottom: 0.2rem;*/
+    /*position: relative;*/
+/*}*/
+.photo-browser .bar-nav{
+    padding-left: .25rem;
+}
+.bar-nav>img{
+    width: .1rem;
+    height: .2rem;
+}
+.bar-tab{
+    height: .44rem;
+    line-height: .44rem;
+    font-size: 16px;
+}
+.bar-tab .tab-item{
+    bottom: 0.13rem;
+    vertical-align: baseline;
+}
+.bar-tab~.content{
+    bottom: .44rem;
+    top: .44rem;
+}
+.bar-tab~.content img{
+    width: 100%;
+}
+
+
+/*文字字体大小是不要换算成rem做单位的，而是使用媒体查询来进行动态设置*/
+@media screen and (max-width: 321px) {
+    .page {
+        font-size:13px
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width:400px) {
+    .page {
+        font-size:14px
+    }
+}
+
+@media screen and (min-width: 400px){
+    html{
+        font-size: 109.333px!important;
+    }
+    .page {
+        font-size:16px;
+    }
+}
+/*针对light7框架默认根标签字体进行覆盖处理*/
+@media  screen and (min-width: 414px) and (max-width:480px) {
+    html {
+        font-size: 110.4px!important;
+    }
+}
+@media  screen and (min-width: 480px){
+    html {
+        font-size: 204.8px!important;
+    }
+}

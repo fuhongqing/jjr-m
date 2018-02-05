@@ -1,0 +1,58 @@
+@import "commen";
+.content {
+  background: #ffffff;
+}
+.tip {
+  color: #7e7e7e;
+  font-size: .5rem;
+  padding-top: .6rem;
+  padding-left: .75rem;
+  line-height: 1;
+}
+
+.list-block {
+  font-size: .7rem;
+  color: #3D3D3D;
+  line-height: 1;
+  margin: 0;
+  ul {
+    background: transparent;
+  }
+  .item-inner {
+    padding-bottom: .4rem;
+    padding-top: 1.4rem;
+    border-bottom: 1px solid #eee;
+  }
+  .item-title.label {
+    margin: 0;
+    width: 4rem;
+  }
+}
+
+.list-block input[type=tel], .list-block input[type=text] {
+  height: auto;
+  &::-webkit-input-placeholder {
+    color: #bcbcbc;
+    opacity: 1;
+    font-size: .7rem;
+  }
+}
+
+.get_redify {
+  border: none;
+  border-radius: 0;
+  color: @blueColor;
+  line-height: 1rem;
+  height: 1rem;
+  border-left: 1px solid @blueColor;
+  padding: 0 .75rem;
+  font-size: .8rem;
+}
+
+.list-block li:last-child .item-inner {
+  border-bottom: 1px solid #eeeeee;
+}
+
+.bar .button.pull-right {
+  .bar-button-pull-right();
+}

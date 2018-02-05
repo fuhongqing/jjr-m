@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/userSetting.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">设置</h1>
+    </header>
+    <div class="content">
+        <div class="list-block J_list">
+            <ul>
+                <li class="item-content">
+                    <a class="item-inner" external id="toUserChangPWone">
+                        <div class="item-title">修改密码</div>
+                        <div class="item-after"><img src="static/img/icon_right_black@3x.png" alt=""></div>
+                    </a>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <button class="item-title" onclick="log('测试')" id="clearLocal"
+                                style="background: none;border: none;padding: 0;width: 100%;text-align: left;">退出登录
+                        </button>
+                        <div class="item-after">
+                            <img src="static/img/icon_right_black@3x.png" alt="">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        var memberPID = GetUrlParms().memberPID;
+        $("#toUserChangPWone").on("click", function () {
+            window.location.href = `userChangPWone.html?memberPID=${memberPID}`
+        });
+        $("#clearLocal").on("click", function () {
+            localStorage.clear();
+            AndroidWebView.back()
+        })
+    })
+</script>
+</body>
+</html>

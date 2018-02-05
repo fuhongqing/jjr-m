@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>客户</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <!--<link rel="shortcut icon" href="/favicon.ico">-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--<meta content="telephone=no" name="format-detection"/>-->
+    <link rel="stylesheet" href="static/custom/css/light7.min.css">
+    <link rel="stylesheet" href="static/custom/css/custom.css"/>
+</head>
+<body>
+<!-- 单个page ,第一个.page默认被展示-->
+<div class="page" id="custom">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav">
+        <div class="grid-demo">
+            <div class="row search flex">
+                <div class="col-14"><img src="static/custom/img/search.png" alt=""/></div>
+                <div class="col-86">
+                    <input type="text" id='search' placeholder='项目名称／客户姓名／号码后4位'/>
+                </div>
+            </div>
+            <div class="row report text">
+                <div class="col-50">今日报备: <span id="today">-</span></div>
+                <div class="col-50 text-right">全部：<span id="total">-</span></div>
+            </div>
+        </div>
+    </header>
+    <!-- 这里是页面内容区 -->
+    <div class="content">
+        <div class="content-block">
+            <!--客户分类-->
+            <ul id="persons" class="flex flex-justify">
+                <li>
+                    <p>未带看</p>
+                    <p id="noDK">-</p>
+                </li>
+                <li>
+                    <p>未成交</p>
+                    <p id="noCJ">-</p>
+                </li>
+                <li>
+                    <p>未发佣</p>
+                    <p id="dfy">-</p>
+                </li>
+                <li>
+                    <p>已发佣</p>
+                    <p id="fy">-</p>
+                </li>
+            </ul>
+            <!--滚动区域-->
+            <div id="customScroll" class="content infinite-scroll" data-distance="150">
+                <!--客户列表-->
+                <ul id="customList">
+                    <!--动态-->
+                    <li class="grid-demo">
+                        <div class="row">
+                            <div class="col-50 D3"><span>-</span><span>-</span></div>
+                            <div class="col-50 text-right"><a>-</a></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-50"><span>-</span></div>
+                            <div class="col-50 text-right"><span>-</span><span>-</span></div>
+                        </div>
+                    </li>
+                </ul>
+                <!--上拉加载-->
+                <div class="grid-demo" id="scrollUpdate">
+                    <div class="row">
+                        <div class="col-100">上拉加载</div>
+                    </div>
+                </div>
+                <!-- 加载提示符 -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
+            </div>
+            <!--超过30天-->
+            <div id="more" class="grid-demo">
+                <div class="row text">
+                    <div class="col-50">超过30天的报备</div>
+                    <div class="col-50 text-right"><img src="static/custom/img/back_right_dark.png" alt=""/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--尾部导航-->
+    <footer>
+        <button onclick="home">
+            <span></span>
+            <p>首页</p>
+        </button>
+        <button onclick="kehu">
+            <span></span>
+            <p>客户</p>
+        </button>
+        <button onclick="wode">
+            <span></span>
+            <p>我的</p>
+        </button>
+    </footer>
+</div>
+<script type='text/javascript' src="static/custom/js/jquery-3.2.1.min.js"></script>
+<script type='text/javascript' src='static/custom/js/light7.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="static/custom/js/custom.js"></script>
+</body>
+</html>

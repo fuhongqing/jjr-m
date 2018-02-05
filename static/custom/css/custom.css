@@ -1,0 +1,312 @@
+/*样式重置*/
+body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,p{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*图片*/
+img{
+    vertical-align: middle;
+}
+/*弹性布局*/
+.flex{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.flex-justify {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+/*右对齐*/
+.text-right{
+    text-align: right;
+}
+/*表单placeholder文字颜色*/
+  input::-webkit-input-placeholder{
+      color:#D6D6D6!important;
+      font-size: 14px;
+  }
+input:-moz-placeholder{
+    color:#D6D6D6!important;//4-18
+font-size: 14px;
+}
+input::-moz-placeholder{
+    color:#D6D6D6!important;//19+
+font-size: 14px;
+}
+input:-ms-input-placeholder{
+    color:#D6D6D6!important;//10+
+font-size: 14px;
+}
+/*页面内容背景白色*/
+.page{
+    background: #F7F7F7;
+}
+/*页面内容区*/
+.page>.content{
+    position: static;
+    height: 6.17rem;
+    overflow: auto;
+}
+.content-block{
+    margin-top: 1.01rem;
+    margin-bottom: .49rem;
+    padding: 0;
+}
+/*重置栅格样式*/
+.grid-demo>.row{
+    margin: 0;
+}
+.grid-demo>.row>div{
+    margin: 0;
+}
+/*底部上拉无限滚动*/
+.infinite-scroll-preloader {
+    margin: 0 .6rem 0 .5rem;
+    display: none;
+}
+.infinite-scroll-preloader>.preloader{
+    width: .2rem;
+    height: .2rem;
+}
+#custom .col-50{
+    width: 50%;
+}
+/*定义一种字体颜色*/
+.text{
+    color:#666666;
+}
+.D3{
+    color:#3D3D3D;
+}
+/*头部*/
+#custom>header{
+    height: .81rem;
+    background: #fff;
+    padding: .07rem .15rem .15rem .15rem;
+}
+/*搜索框*/
+#custom>header input{
+    width: 100%;
+    height: .3rem;
+    background: #F7F7F7;
+    border-radius: 15px;
+    border: .01rem solid #F7F7F7;
+    padding: 0 .14rem;
+}
+/*搜索框所在行*/
+#custom>header .search{
+    line-height: .3rem;
+    margin-bottom: .15rem;
+	justify-content:flex-start;
+}
+#custom>header .search>div:first-child{
+    margin-right: .13rem;
+}
+#custom>header .search>div:last-child{
+    flex:1;
+}
+/*今日报备情况及全部*/
+#custom>header .report>div:last-child>span{
+    margin-left: .05rem;
+}
+/*内容区*/
+/*客户分类*/
+#persons{
+    padding: .15rem .21rem 0 .21rem;
+}
+#persons>li{
+    width: .76rem;
+    height: .6rem;
+    line-height: .27rem;
+    opacity: 0.8;
+    border-radius: .04rem;
+    color: #fff;
+    text-align: center;
+}
+#persons>li>p:first-child{
+    font-size: 12px;
+    /*margin-top: .05rem;*/
+ }
+#persons>li>p:last-child{
+    font-size: 20px;
+}
+#persons>li:nth-child(1){
+    background: linear-gradient(45deg, #2AD7C8 0%, #38C9A3 100%);
+}
+#persons>li:nth-child(2){
+    background: linear-gradient(-135deg, #4BA3E7 0%, #50D1F6 100%);
+}
+#persons>li:nth-child(3){
+    background: linear-gradient(45deg, #FEC971 0%, #F6A623 100%);
+}
+#persons>li:nth-child(4){
+    background: linear-gradient(45deg, #FF8E8E 0%, #FF5555 60%, #FF5555 100%);
+}
+/*滚动区域*/
+#customScroll{
+    position: relative;
+}
+/*客户列表*/
+#customList>li{
+    min-height: .67rem;
+    background: #fff;
+    margin: .15rem;
+    padding: .1rem .15rem;
+}
+#customList>li>div:last-child{
+    margin-top: .1rem;
+    font-size: 12px;
+    color: #888888;
+}
+#customList .col-50>span:first-child{
+    margin-right: .15rem;
+}
+#customList a{
+    border: 1px solid #48CFAD;
+    border-radius: 5px;
+    display: inline-block;
+    width: .44rem;
+    height: .2rem;
+    line-height: .19rem;
+    text-align: center;
+    color:#48CFAD;
+    font-size: 11px;
+}
+/*已发 样式*/
+#customList .send{
+    color:#FD7575;
+    border-color:#FD7575;
+}
+/*大定 样式*/
+#customList .achieved{
+    color:#71D3F5;
+    border-color:#71D3F5;
+}
+/*2访 样式*/
+#customList .twice{
+    color:#759CEA;
+    border-color:#759CEA;
+}
+/*班车 样式*/
+#customList .bus{
+    color:#48CFAD;
+    border-color:#48CFAD;
+}
+/*签约 样式*/
+#customList .deal{
+    color: #FF8051;
+    border-color: #FF8051;
+}
+/*超过30天*/
+#more{
+    height: .44rem;
+    background: #fff;
+    padding: .14rem .3rem;
+    font-size: 11px;
+}
+#more img{
+    width: 7px;
+    height: 15px;
+}
+/*上拉加载*/
+#scrollUpdate{
+    text-align: center;
+    margin-top: .1rem;
+    display: none;
+}
+/* footer */
+footer p{
+    color: #A4A4A4;
+    height: .1rem;
+    margin: 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    height: .5rem;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    z-index: 9999;
+}
+footer span {
+    height: .3rem;
+    display: block;
+    background-size: contain;
+}
+footer>button {
+    flex: 1;
+    text-align: center;
+    font-size: 10px;
+    background: #fff;
+    border: none;
+}
+footer>button:nth-child(1) span {
+    background: url(../img/icon_home@3x.png) no-repeat center top;
+    background-size: contain;
+}
+footer>button:nth-child(2) span {
+    background: url(../img/icon_client_active@3x.png) no-repeat center top;
+    background-size: contain;
+}
+footer>button:nth-child(3) span {
+    background: url(../img/icon_user@3x.png) no-repeat center top;
+    background-size: contain;
+}
+
+footer>button:nth-child(2) p{
+    color: #333;
+}
+
+/*文字字体大小是不要换算成rem做单位的，而是使用媒体查询来进行动态设置*/
+@media screen and (max-width: 321px) {
+    .page {
+        font-size:13px
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width:400px) {
+    .page {
+        font-size:14px
+    }
+}
+
+@media screen and (min-width: 400px){
+    html{
+        font-size: 109.333px!important;
+    }
+    .page {
+        font-size:16px;
+    }
+}
+/*针对light7框架默认根标签字体进行覆盖处理*/
+@media  screen and (min-width: 414px) and (max-width:480px) {
+    html {
+        font-size: 110.4px!important;
+    }
+}
+@media  screen and (min-width: 480px){
+    html {
+        font-size: 204.8px!important;
+    }
+}

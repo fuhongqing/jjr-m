@@ -1,0 +1,44 @@
+@import "varities";
+@import "commen";
+
+.J_userOwnData_user_warp {
+  font-size: .7rem;
+  .display_flex(space-between);
+  .J_userOwnData_user_avter {
+    img {
+      border-radius: 50%;
+      display: block;
+      width: 3rem;
+    }
+  }
+}
+
+.J_userOwnData_user {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.J_list .item-content {
+  color: #3d3d3d;
+  padding: 0 .75rem;
+  .item-after {
+    color: #3d3d3d;
+    .text-nowarp;
+    text-align: right;
+    max-width: 13rem;
+    img {
+      width: .4rem;
+      height: .6rem;
+      margin-left: .75rem;
+      display: inline-block;
+      margin-top: .15rem;
+    }
+  }
+}
+
+.J_list:last-child {
+  .item-content:nth-child(-n+3) .item-after {
+    color: #666666;
+  }
+}
+

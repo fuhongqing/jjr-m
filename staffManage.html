@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/staffManage.css">
+</head>
+<body>
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png"/>
+        </a>
+        <h1 class="title">员工管理</h1>
+    </header>
+    <div class="bar bar-header-secondary">
+        <div class="searchbar">
+            <div class="search-input">
+                <label for="search">
+                    <img src="static/img/icon_search.png" alt=""
+                         style="width:.6rem;margin:.45rem .25rem .45rem .5rem ;position: absolute;">
+                </label>
+                <input type="text" id='search' style="height:1.5rem;" placeholder='搜索员工姓名/手机号码后四位' value=""/>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="staff_number" id="staff_number">
+            <div>在职员工<span></span></div>
+            <div>离职员工<span></span></div>
+        </div>
+        <div class="list-block contacts-block" id="getMemberList">
+
+        </div>
+        <div class="list-block contacts-block" id="getMemberList2">
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script src="static/pinying.js"></script>
+<script>
+    $(function () {
+        //agencyID 公司ID require
+        $("#search").val("");
+        var _getMemberList = {
+            agencyID: GetUrlParms().agencyID
+        };
+        $ajax("member/getMemberList", _getMemberList, getMemberList);
+
+        function getMemberList(data) {
+            if (data.status === 'success') {
+                $("#staff_number").html(`<div>在职员工<span>${data.flag1}</span></div><div>离职员工<span>${data.flag0}</span></div>`);
+                //按姓名首字母排序（a---z基本排序）
+                var memberList = data.memberList.sort(function (a, b) {
+                    return a["FullName"].localeCompare(b["FullName"], 'zh-Hans-CN', {sensitivity: 'accent'})
+                });
+                var _memberList = {};
+                //根据首字母分割排序
+                $.each(memberList, function (index, element) {
+                    var firstChar = element['FullName'].charAt(0).toString();
+                    var arrRslt = makePy(firstChar).join("").charAt(0);
+                    if (typeof _memberList[arrRslt] === "undefined") {
+                        _memberList[arrRslt] = [""];
+                        _memberList[arrRslt].push(element);
+                    } else {
+                        _memberList[arrRslt].push(element)
+                    }
+                });
+                var strData = [];
+                var str2 = `</ul></div>`;
+                $.each(_memberList, function (key, val) {
+                    var str1 = `<div class="list-group"><ul><li class="list-group-title">${key}</li>`;
+                    strData.push(str1);
+                    for (var i = 1, l = val.length; i < l; i++) {
+                        var _strData = `<li>
+                                        <div class="item-content">
+                                            <div class="item-inner " >
+                                                <a class="item-title external" href="staffOwnData.html?memberPID=${val[i].id}"><span>${val[i].FullName}</span><span>${val[i].Mobilephone}</span></a>
+                                                <a class="item-tel external" href="tel://${val[i].Mobilephone}"><img src="static/img/icon_iphone@3x.png" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </li>`;
+                        strData.push(_strData);
+                    }
+                    strData.push(str2)
+                });
+                strData = strData.join("");
+                $("#getMemberList").html(strData);
+                // light7自带方法
+                $(".contacts-block").indexList();
+                //输入搜索事件
+                $("#search").on("input", function () {
+                    var pattern1 = /^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/;
+                    var pattern2 = /\d{4}$/;
+                    var _val = $(this).val();
+                    if (pattern1.test(_val)) {
+                        $("#getMemberList").hide();
+                        resetName1(_val);
+                        $("#getMemberList2").show();
+                    } else if (pattern2.test(_val - 0)) {
+                        $("#getMemberList").hide();
+                        resetName2(_val);
+                        $("#getMemberList2").show();
+                    } else {
+                        $("#getMemberList").show();
+                        $("#getMemberList2").hide();
+                    }
+                });
+
+                //输入搜索事件--姓名搜索
+                function resetName1(_val) {
+                    var strData = [];
+                    var str1 = `<div class="list-group"><ul>`;
+                    var str2 = `</ul></div>`;
+                    strData.push(str1);
+                    $.each(memberList, function (index, ele) {
+                        if (ele["FullName"].indexOf(_val) != -1) {
+                            var str1 = `<li>
+                                        <div class="item-content">
+                                            <div class="item-inner " >
+                                                <a class="item-title external" href="staffOwnData.html?memberPID=${ele.id}"><span>${ele.FullName}</span><span>${ele.Mobilephone}</span></a>
+                                                <a class="item-tel external" href="tel:${ele.Mobilephone}"><img src="static/img/icon_iphone@3x.png" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </li>`;
+                            strData.push(str1);
+                        }
+                    });
+                    strData.push(str2);
+                    strData = strData.join("");
+                    $("#getMemberList2").html(strData);
+                }
+
+                //输入搜索事件--电话后四位搜索
+                function resetName2(_val) {
+                    var strData = [];
+                    var str1 = `<div class="list-group"><ul>`;
+                    var str2 = `</ul></div>`;
+                    strData.push(str1);
+                    $.each(memberList, function (index, ele) {
+                        if (ele["Mobilephone"].substr(7).indexOf(_val) != -1) {
+                            var str1 = `<li>
+                                        <div class="item-content">
+                                            <div class="item-inner " >
+                                                <a class="item-title external" href="staffOwnData.html?memberPID=${ele.id}"><span>${ele.FullName}</span><span>${ele.Mobilephone}</span></a>
+                                                <a class="item-tel external" href="tel:${ele.Mobilephone}"><img src="static/img/icon_iphone@3x.png" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </li>`;
+                            strData.push(str1);
+                        }
+                    });
+                    strData.push(str2);
+                    strData = strData.join("");
+                    $("#getMemberList2").html(strData);
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

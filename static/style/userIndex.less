@@ -1,0 +1,39 @@
+@import "commen";
+
+.J_userIndex_user {
+  padding-top: .9rem;
+  padding-bottom: 1.1rem;
+  background: @blueColor;
+  &_warp {
+    .display_flex(space-between);
+    &_l {
+      .display_flex(flex-start);
+    }
+  }
+  &_avter {
+    padding-right: @containerPadding;
+    img {
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+  &_name {
+    color: #ffffff;
+    font-size: .6rem;
+    .real_name {
+      font-size: .8rem;
+    }
+  }
+  .J_userIndex_user_warp {
+    &_r {
+      padding: 1rem 0 1rem 3rem;
+    }
+  }
+}
+
+.J_list {
+  .item-content {
+    padding: 0 .75rem;
+  }
+}

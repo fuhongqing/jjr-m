@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工详情</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/staffOwnData.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">员工详情</h1>
+    </header>
+    <div class="content">
+        <div class="list-block">
+            <ul id="getMemberDetailInfo">
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">员工姓名</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">手机号码</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">注册时间</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">在职状态</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="staff_yeji">
+            <div class="buttons-tab">
+                <span class="tab-link button active" data-contType="2">本周</span>
+                <span class="tab-link button" data-contType="3">本月</span>
+                <span class="tab-link button" data-contType="5">全部</span>
+            </div>
+            <div class="tab">
+                <div class="content-block">
+                    <div class="row tab_title">
+                        <div class="col-25 text-nowarp">报备</div>
+                        <div class="col-25 text-nowarp">来访</div>
+                        <div class="col-25 text-nowarp">成交</div>
+                        <div class="col-25 text-nowarp">发佣</div>
+                    </div>
+                    <div class="row tab_list" id="getGradeInfoByMemberPIdAndCountType">
+                        <div class="col-25 text-nowarp"><span>组<span/></div>
+                        <div class="col-25 text-nowarp"><span>组</span></div>
+                        <div class="col-25 text-nowarp"><p><span>组</span></p>
+                            <p><span>万</span></p></div>
+                        <div class="col-25 text-nowarp"><span>组</span><span>万</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        //memberPID 员工ID require 员工基本资料
+        var _getMemberDetailInfo = {
+            memberPID: GetUrlParms("memberPID").memberPID
+        };
+        $ajax("member/getMemberDetailInfo", _getMemberDetailInfo, getMemberDetailInfo);
+
+        function getMemberDetailInfo(data) {
+            if (data.status === "success") {
+                var _dataStr = `<li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">员工姓名</div>
+                        <div class="item-after">${data.FullName}</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">手机号码</div>
+                        <div class="item-after">${data.Mobilephone}</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">注册时间</div>
+                        <div class="item-after">${data.CreatTime}</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">在职状态</div>
+                        <div class="item-after">${data.Flag === 1 ? "在职" : "离职"}</div>
+                    </div>
+                </li>`;
+                $("#getMemberDetailInfo").html(_dataStr)
+            }
+        }
+
+        // <p>12345<span>万</span></p>
+        //员工业绩资料
+        // memberPID  countType
+        var _getGradeInfoByMemberPIdAndCountType = {
+            memberPID: GetUrlParms("memberPID").memberPID,
+            countType: 5
+        };
+        $ajax("member/getGradeInfoByMemberPIdAndCountType", _getGradeInfoByMemberPIdAndCountType, getGradeInfoByMemberPIdAndCountType);
+
+        function getGradeInfoByMemberPIdAndCountType(data) {
+            var dataStr = `<div class="col-25 text-nowarp">${data.gradeInfo.customerCount}<span>组<span/></div>
+                            <div class="col-25 text-nowarp">${data.gradeInfo.customerLook}<span>组</span></div>
+                            <div class="col-25 text-nowarp">
+                            <p>${data.gradeInfo.houseSign}<span>组</span><br\>${data.gradeInfo.signMoney}<span>万</span></p>
+                            </div>
+                            <div class="col-25 text-nowarp">${data.gradeInfo.commissionHouse}<span>组</span><br\>${data.gradeInfo.commissionEnd}<span>万</span></div>`;
+            $("#getGradeInfoByMemberPIdAndCountType").html(dataStr)
+        }
+
+        $(".buttons-tab .button").on("click", function () {
+            var _this = $(this);
+            _this.addClass("active").siblings().removeClass("active");
+            _getGradeInfoByMemberPIdAndCountType.countType = _this.attr("data-contType");
+            $ajax("member/getGradeInfoByMemberPIdAndCountType", _getGradeInfoByMemberPIdAndCountType, getGradeInfoByMemberPIdAndCountType);
+        })
+    })
+</script>
+</body>
+</html>

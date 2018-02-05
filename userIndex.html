@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/userIndex.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <nav class="bar bar-tab">
+        <button class="tab-item" id="index" external onclick="home('home')">
+            <span class="tab_img"><img src="static/img/tag/icon_home@3x.png" alt=""></span>
+            <span class="tab-label">首页</span>
+        </button>
+        <button class="tab-item" id="custom" external onclick="kehu('kefu')">
+            <span class="tab_img"><img src="static/img/tag/icon_client@3x.png" alt=""></span>
+            <span class="tab-label">客户</span>
+        </button>
+        <button class="tab-item active" id="userIndex" external onclick="wode('wode')">
+            <span class="tab_img"><img src="static/img/tag/icon_user_active@3x.png" alt=""></span>
+            <span class="tab-label">我的</span>
+        </button>
+    </nav>
+    <div class="content">
+        <div class="J_userIndex_user J_container">
+            <div class="J_userIndex_user_warp">
+                <div class="J_userIndex_user_warp_l">
+                    <div class="J_userIndex_user_avter">
+                        <img src="static/img/icon_my@3x.png"/>
+                    </div>
+                    <div class="J_userIndex_user_name" id="getLoginUserBaseInfo">
+                        <div><span class="real_name"></span></div>
+                        <div></div>
+                    </div>
+                </div>
+                <a class="J_userIndex_user_warp_r" external id="toUserOwnData">
+                    <img src="static/img/icon_right_white@3x.png" alt="" class="icon_next">
+                </a>
+            </div>
+        </div>
+        <div class="list-block J_list" style="color: #3d3d3d">
+            <ul>
+                <li class="item-content">
+                    <a class="item-inner" external id="toCoOwnData">
+                        <div class="item-title">公司资料</div>
+                    </a>
+                </li>
+                <li class="item-content">
+                    <a class="item-inner" external id="toCoOwnArc">
+                        <div class="item-title">公司组织架构</div>
+                    </a>
+                </li>
+                <li class="item-content">
+                    <a class="item-inner" external id="toStaffManage">
+                        <div class="item-title">员工管理</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="list-block J_list" style="color: #333">
+            <ul>
+                <li class="item-content">
+                    <a class="item-inner">
+                        <div class="item-title">客服热线</div>
+                        <div class="item-after">
+                            <img src="static/img/icon_phone@3x.png" class="icon_list" alt="">
+                        </div>
+                    </a>
+                </li>
+                <li class="item-content">
+                    <a class="item-inner" external id="toUserSetting">
+                        <div class="item-title">设置</div>
+                        <div class="item-after">
+                            <img src="static/img/icon_set@3x.png" class="icon_list" alt="">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        var userData = {
+            "memberPID": localStorage.getItem("memberPID"),
+            "userType": localStorage.getItem("userType"),
+            "agencyID": localStorage.getItem("agencyID"),
+            "branchID": localStorage.getItem("branchID")
+        };
+        $ajax("member/getLoginUserBaseInfo", userData, getLoginUserBaseInfo);
+
+        // (${data.nickName})
+        function getLoginUserBaseInfo(data) {
+            var strData = `<div><span class="real_name">${data.memberFullName}</span></div><div>${data.memberAgencyName}</div>`;
+            $("#getLoginUserBaseInfo").html(strData);
+            $("#toUserOwnData").on("click", function () {
+                window.location.href = `userOwnData.html?agencyID=${userData.agencyID}&userType=${userData.userType}&memberPID=${userData.memberPID}&branchID=${userData.branchID}`
+            });
+            $("#toCoOwnData").on("click", function () {
+                window.location.href = `coOwnData.html?agencyID=${userData.agencyID}&userType=${userData.userType}&branchID=${userData.branchID}`
+            });
+            $("#toCoOwnArc").on("click", function () {
+                window.location.href = `coOwnArc.html?agencyID=${userData.agencyID}&userType=${userData.userType}&branchID=${userData.branchID}&memberAgencyName=${data.memberAgencyName}`
+            });
+            $("#toStaffManage").on("click", function () {
+                window.location.href = `staffManage.html?agencyID=${userData.agencyID}`
+            });
+            $("#toUserSetting").on("click", function () {
+                window.location.href = `userSetting.html?memberPID=${userData.memberPID}`
+            });
+        }
+
+        $("#index").on("click", function () {
+            window.location.href = "index.html"
+        });
+        $("#custom").on("click", function () {
+            window.location.href = "custom.html"
+        });
+        $("#userIndex").on("click", function () {
+            window.location.href = "userIndex.html"
+        })
+    })
+</script>
+</body>
+</html>

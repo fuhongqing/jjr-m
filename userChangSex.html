@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>性别</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/style/useChangeSex.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">性别</h1>
+        <button class="button pull-right" id="submit">
+            提交
+        </button>
+    </header>
+    <div class="content">
+        <div class="list-block" id="form">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <label class="item-inner" for="male">
+                            <div class="item-title">男</div>
+                            <div class="item-after">
+                                <input type="radio" name="user[sex]" id="male" data-sex="1">
+                                <img src="static/img/icon_check@3x.png" alt="">
+                            </div>
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <label class="item-inner" for="female">
+                            <div class="item-title">女</div>
+                            <div class="item-after">
+                                <input type="radio" name="user[sex]" id="female" data-sex="2">
+                                <img src="static/img/icon_check@3x.png" alt="">
+                            </div>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        var memberSex = GetUrlParms().memberSex;
+        if (memberSex === "1") {
+            $("#male").prop("checked", true);
+        } else if (memberSex === "2") {
+            $("#female").prop("checked", true);
+        } else {
+            $("#female,#male").prop("checked", false);
+        }
+
+        $("#submit").on("click", function () {
+            var _data = {
+                memberPID: GetUrlParms().memberPID,
+                type: 2,
+                sex: $("input[name='user[sex]']:checked").attr("data-sex")
+            };
+            $ajax("member/updateMemberInfo", _data, updateMemberInfo);
+        });
+
+        function updateMemberInfo(data) {
+            if (data.status === 1) {
+                $.toast(data.msg);
+                goBack(2000)
+            } else {
+                $.toast(data.msg);
+            }
+        }
+    })
+</script>
+</body>
+</html>

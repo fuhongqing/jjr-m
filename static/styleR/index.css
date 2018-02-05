@@ -1,0 +1,30 @@
+body,
+.page {
+  background: #f7f7f7;
+}
+.bar.bar-nav {
+  background: #ffffff;
+  border-bottom-color: #d8d8d8;
+}
+.title {
+  color: #000;
+  font-size: .85rem;
+}
+.list-block ul {
+  border: none;
+}
+.list-block .item-after {
+  max-height: none;
+}
+.list-block .item-content {
+  min-height: 2rem;
+  line-height: 1;
+}
+.list-block .item-inner {
+  padding-right: 0;
+  min-height: 2rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  line-height: 1rem;
+  border-bottom-color: #f5f5f5;
+}

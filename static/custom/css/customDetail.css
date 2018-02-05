@@ -1,0 +1,303 @@
+/*样式重置*/
+body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,p{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.lf{
+    float: left;
+}
+.gt{
+    float: right;
+}
+.clear:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.toast{
+    height:.4rem;
+    font-size: 14px;
+    padding: 0 .15rem;
+    line-height: .4rem;
+    border-radius: .2rem;
+}
+/*图片*/
+img{
+    vertical-align: middle;
+}
+.text-right{
+    text-align: right;
+}
+#customDetail .col-50{
+    width: 50%;
+}
+.key{
+    color: #888888;
+}
+.value{
+    color: #3D3D3D;
+}
+.text{
+    color:#666666;
+}
+/*页面内容背景白色*/
+.page{
+    background: #F7F7F7;
+    color:#666666;
+}
+/*页面内容区*/
+.page>.content{
+    position: static;
+    height: 6.17rem;
+    overflow: auto;
+}
+.content-block{
+    margin-top: .64rem;
+    margin-bottom: .49rem;
+    padding:.15rem;
+}
+/*重置栅格样式*/
+.grid-demo>.row{
+    margin: 0;
+}
+.grid-demo>.row>div{
+    margin: 0;
+}
+/*头部*/
+#customDetail>header{
+    height: .44rem;
+    background: #fff;
+    padding: 0;
+}
+#customDetail>header>img{
+    margin-top: .12rem;
+    margin-left: .2rem;
+}
+#customDetail>header>div{
+    line-height: .43rem;
+    font-size: 17px;
+    color: #3D3D3D;
+    text-align: center;
+}
+/*内容区*/
+.customTitle{
+    margin-bottom: .1rem;
+}
+.customTitle .col-70{
+    width: 70%;
+}
+.customTitle .col-30{
+    width: 30%;
+}
+.customTitle img{
+    width: 7px;
+    height: 15px;
+}
+.customTitle .more{
+    margin-right: .15rem;
+}
+/*发佣字体*/
+.customTitle .send{
+    color: #333333;
+}
+/*联系人信息*/
+#contact{
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: .1rem .12rem .1rem .15rem;
+    min-height: .41rem;
+    margin-bottom: .15rem;
+}
+button{
+    background: #fff;
+    outline: none;
+    border: none;
+    padding: 0;
+}
+#contact button>img{
+    margin-left: .2rem;
+}
+#contact>li{
+    margin-bottom: .16rem;
+}
+#contact>li>span:first-child{
+    margin-right: .15rem;
+}
+#contact>li>span.phone{
+    margin-right: .34rem;
+}
+#contact>li:last-child{
+    text-align: center;
+    border-top: .01rem solid #F5F5F5;
+    padding-top: .1rem;
+    margin-bottom:0;
+    display: block!important;
+}
+/*发佣详情*/
+#sendDetail{
+    background: #FFFFFF;
+    border-radius: 4px;
+    min-height: 3.25rem;
+    padding: .15rem .15rem .19rem .15rem;
+    margin-bottom: .15rem;
+}
+#sendDetail>li{
+    margin-bottom: .14rem;
+    font-size: 13px;
+    color: #666666;
+}
+/*未发佣时不显示实发佣金与出款凭证*/
+#sendDetail>li.isSended{
+    /*display: none;*/
+}
+#sendDetail>li>span:first-child{
+    display: inline-block;
+    width: .92rem;
+}
+/*图片*/
+#sendDetail>.proof img{
+    vertical-align: top;
+    width: .96rem;
+}
+/*跟进*/
+#follow{
+    background: #FFFFFF;
+    border-radius: 10px;
+    min-height: 2.15rem;
+    padding: .24rem .15rem .2rem .05rem;
+}
+#follow .circle{
+    display: inline-block;
+    width: .18rem;
+    height: .18rem;
+    text-align: center;
+    line-height: .2rem;
+    color: #fff;
+    background: #FF5555;
+    border-radius: 50%;
+    margin-right: .07rem;
+}
+/*案场*/
+.case{
+    background: #FFBC00;
+}
+/*人名*/
+#follow .name{
+    color: #999999;
+}
+#follow>.row>div:last-child{
+    color: #999999;
+    font-size: 10px;
+}
+/*文字内容*/
+#follow>.dataInfo{
+    position: relative;
+    min-height: .61rem;
+    margin: .08rem 0 .02rem .15rem;
+}
+#follow>.dataInfo>.caret{
+   position: absolute;
+    width: 0;
+    height: 0;
+    border: .05rem solid transparent;
+    border-bottom-color: #EEEEEE;
+    left: .11rem;
+    top: -.1rem;
+}
+#follow>.dataInfo>div:last-child{
+    font-size: 12px;
+    color: #000000;
+    padding: .16rem .01rem .09rem .11rem;
+    background: #EEEEEE;
+    border-radius: 4px;
+    height: .58rem;
+    margin-top: .03rem;
+}
+/*图片浏览器*/
+.bar-nav{
+    height: .44rem;
+    line-height: .35rem;
+}
+/*.bar-nav .icon-left{*/
+/*line-height: .44rem;*/
+/*padding: 0;*/
+/*}*/
+/*.photo-browser .title{*/
+/*font-size: 20px;*/
+/*line-height: .44rem;*/
+/*}*/
+/*.icon-left:before {*/
+/*font-size: 20px;*/
+/*bottom: 0.2rem;*/
+/*position: relative;*/
+/*}*/
+.photo-browser .bar-nav{
+    padding-left: .13rem;
+}
+.bar-nav>img{
+    width: .1rem;
+    height: .2rem;
+}
+.bar-tab{
+    height: .44rem;
+    line-height: .44rem;
+    font-size: 16px;
+}
+.bar-tab .tab-item{
+    bottom: 0.13rem;
+    vertical-align: baseline;
+}
+.bar-tab~.content{
+    bottom: .44rem;
+    top: .44rem;
+}
+.bar-tab~.content img{
+    width: 100%;
+}
+/*文字字体大小是不要换算成rem做单位的，而是使用媒体查询来进行动态设置*/
+@media screen and (max-width: 321px) {
+    .page {
+        font-size:13px
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width:400px) {
+    .page {
+        font-size:14px
+    }
+}
+
+@media screen and (min-width: 400px){
+    html{
+        font-size: 109.333px!important;
+    }
+    .page {
+        font-size:16px;
+    }
+}
+/*针对light7框架默认根标签字体进行覆盖处理*/
+@media  screen and (min-width: 414px) and (max-width:480px) {
+    html {
+        font-size: 110.4px!important;
+    }
+}
+@media  screen and (min-width: 480px){
+    html {
+        font-size: 204.8px!important;
+    }
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="static/dist/light7/css/light7.min.css">
+    <link rel="stylesheet" href="static/dist/light7/css/light7-swiper.min.css">
+    <link rel="stylesheet" href="static/style/coOwnData.css">
+</head>
+<body>
+<!-- page 容器 -->
+<div class="page">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+            <img src="static/img/icon_left@3x.png" alt="">
+        </a>
+        <h1 class="title">公司资料</h1>
+    </header>
+    <div class="content">
+        <div class="content-block-title J_block_title">公司信息</div>
+        <div class="list-block">
+            <ul id="getAgencyBaseInfo1">
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">公司名称</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">公司简称</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title" style="align-self: flex-start">营业执照</div>
+                        <div class="item-after">
+                            <img class="item-after_img" src="static/img/pic_default@3x.png" alt="">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block-title J_block_title">发佣账户</div>
+        <div class="list_block_group" id="getAgencyBaseInfo2">
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src="static/dist/jquery-3.2.1.min.js" charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/dist/light7/js/light7-swiper.min.js' charset='utf-8'></script>
+<script src="static/usage.js"></script>
+<script>
+    $(function () {
+        // 获取公司资料
+        //userType 1 法人 2 非法人 require
+        //agencyID 公司ID  require
+        //branchID 分行ID [备注：userType=2时必选]
+        $ajax("member/getAgencyBaseInfo", {
+            userType: GetUrlParms().userType,
+            agencyID: GetUrlParms().agencyID,
+            branchID: GetUrlParms().branchID
+        }, getAgencyBaseInfo);
+
+        function getAgencyBaseInfo(data) {
+            if (data.status === 'success') {
+                // 基本信息
+                //营业执照图片
+                var agencyInfoImgStr = data.agencyInfo.filefullname.split(",");
+                var dataStr = `<li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">公司名称</div>
+                        <div class="item-after">${data.agencyInfo.AgencyName}</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">公司简称</div>
+                        <div class="item-after">${data.agencyInfo.Abbreviation}</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title" style="align-self: flex-start">营业执照</div>
+                        <div class="item-after agencyInfoImgStr">
+                            <img class="item-after_img" src="${agencyInfoImgStr[0]}">
+                        </div>
+                    </div>
+                </li>`;
+                $("#getAgencyBaseInfo1").html(dataStr);
+                //图片浏览
+                $(document).on('click', '.agencyInfoImgStr', function () {
+                    var agencyInfoImgStrShow = $.photoBrowser({
+                        photos: agencyInfoImgStr
+                    });
+                    agencyInfoImgStrShow.open();
+                });
+                // 发佣账户
+                var _dataStr = [];
+                //发佣账户开户许可证图片
+                var agencyBankInfoImgStr = [];
+                if(data.agencyBankInfo && data.bankImgList){
+                    $.each(data.bankImgList, function (index, ele) {
+                        var _strImg = ele.filefullname.split(",");
+                        agencyBankInfoImgStr.push(_strImg)
+                    });
+                    for (var i = 0, l = data.agencyBankInfo.length; i < l; i++) {
+                        var _str = `<div class="list-block">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">户名${i + 1}</div>
+                                                <div class="item-after">${data.agencyBankInfo[i]["accountName"]}</div>
+                                            </div>
+                                        </li>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">开户行</div>
+                                                <div class="item-after">${data.agencyBankInfo[i]["bankName"]}</div>
+                                            </div>
+                                        </li>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">银行账号</div>
+                                                <div class="item-after">${data.agencyBankInfo[i]["bankNo"]}</div>
+                                            </div>
+                                        </li>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title" style="align-self: flex-start">开户许可证</div>
+                                                <div class="item-after agencyBankInfoImgStr">
+                                                    <img class="item-after_img" src="${agencyBankInfoImgStr[i] === "" ? "" : agencyBankInfoImgStr[i][0]}">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>`;
+                        _dataStr.push(_str)
+                    }
+                    _dataStr = _dataStr.join('');
+                    $("#getAgencyBaseInfo2").html(_dataStr);
+
+                    $(document).on('click', '.agencyBankInfoImgStr', function () {
+                        var photos = agencyBankInfoImgStr[$(this).index() - 1];
+                        var agencyBankInfoImgStrShow = $.photoBrowser({
+                            photos: photos
+                        });
+                        agencyBankInfoImgStrShow.open();
+                    });
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

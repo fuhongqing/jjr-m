@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>业务进程</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" href="static/custom/css/light7.min.css">
+    <link rel="stylesheet" href="static/custom/css/light7-swiper.min.css"/>
+    <link rel="stylesheet" href="static/custom/css/progress.css"/>
+</head>
+<body>
+<!-- 单个page ,第一个.page默认被展示-->
+<div class="page" id="progress">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav clear">
+        <img class="lf" src="static/custom/img/back_left.png" alt=""/>
+        <div>业务进程</div>
+    </header>
+    <!-- 这里是页面内容区 -->
+    <div class="content">
+        <div class="content-block clear">
+            <!--进程-->
+            <div id="progressItems" class="gt">
+                <!--已发佣-->
+                <div id="yfy">
+                    <div class="progressBar">
+                        <span>-</span><span>-</span>
+                    </div>
+                    <ul class="progressContent">
+                        <li><span>原始佣金：</span><span>-</span></li>
+                        <li><span>折佣：</span><span>-</span></li>
+                        <li><span>佣金奖励：</span><span>-</span></li>
+                        <li><span>提供发票：</span><span>-</span></li>
+                        <li><span>应发佣金：</span><span>-</span></li>
+                        <li><span>实发佣金：</span><span>-</span></li>
+                        <li class="proof out">出款凭证:</li>
+                        <li class="out"><img class="pb-standalone" src="static/custom/img/print.png" alt=""/></li>
+                    </ul>
+                </div>
+                <!--签约-->
+                <div id="qy">
+                    <div class="progressBar sign">
+                        <span>-</span>
+                    </div>
+                    <ul class="progressContent signBar">
+                        <li><span>签约时间：</span><span>-</span></li>
+                        <li><span>案场销售：</span><span>-</span></li>
+                        <li><span>签约总价：</span><span>-</span></li>
+                        <li><span>签约面积：</span><span>-</span></li>
+                        <li><span>优惠方案：</span><span>-</span></li>
+                        <li><span>应收定金：</span><span>-</span></li>
+                        <li><span>实收定金：</span><span>-</span></li>
+                        <li class="remark">备注: -</li>
+                    </ul>
+                </div>
+                <!--大定-->
+                <div id="dd">
+                    <div class="progressBar achieved">
+                        <span>-</span>
+                    </div>
+                    <ul class="progressContent achievedBar">
+                        <li><span>大定时间：</span><span>-</span></li>
+                        <li><span>案场销售：</span><span>-</span></li>
+                        <li><span>大定总价：</span><span>-</span></li>
+                        <li><span>已付大定金额：</span><span>-</span></li>
+                        <li><span>优惠方案：</span><span>-</span></li>
+                        <li><span>应收定金：</span><span>-</span></li>
+                        <li><span>实收定金：</span><span>-</span></li>
+                        <li><span>签约时间：</span><span>-</span></li>
+                        <li class="remark">备注: -</li>
+                    </ul>
+                </div>
+                <!--1访-->
+                <div id="visit">
+                    <div class="progressBar visit">
+                        <span>-</span><span>客户意向：-</span>
+                    </div>
+                    <ul class="progressContent visitBar">
+                        <li><span>来访时间：</span><span>-</span></li>
+                        <li><span>案场销售：</span><span>-</span></li>
+                        <li><span>来访人数：</span><span>-</span></li>
+                        <li><span>出价金额：</span><span>-</span></li>
+                        <li><span>出价金额：</span><span>-</span></li>
+                        <li><span>落座：</span><span>-</span></li>
+                        <li><span>落位：</span><span>-</span></li>
+                        <li class="proof">带看确认单</li>
+                        <li><img class="pb-standalone" src="static/custom/img/print.png" alt=""/></li>
+                        <li class="remark">备注: -</li>
+                    </ul>
+                </div>
+                <!--报备-->
+                <div id="bb">
+                    <div class="progressBar report">
+                        <span>-</span>
+                    </div>
+                    <ul class="progressContent reportBar">
+                        <li><span>报备时间：</span><span>-</span></li>
+                        <li><span>来访时间：</span><span>-</span></li>
+                        <li><span>预约案场：</span><span>-</span></li>
+                        <li><span>来访方式：</span><span>-</span></li>
+                        <li><span>上车时间：</span><span>-:-</span></li>
+                        <li><span>上车地点：</span><span>-</span></li>
+                        <li class="remark">备注: -</li>
+                    </ul>
+                </div>
+            </div>
+            <!--步骤条-->
+            <div id="steps">
+                <div>
+                    <span class="circle"></span><span class="line"></span>
+                </div>
+                <div class="sign">
+                    <span class="circle"></span><span class="line"></span>
+                </div>
+                <div class="achieved">
+                    <span class="circle"></span><span class="line"></span>
+                </div>
+                <div class="visit">
+                    <span class="circle"></span><span class="line"></span>
+                </div>
+                <div class="report">
+                    <span class="circle"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src="static/custom/js/jquery-3.2.1.min.js"></script>
+<script type='text/javascript' src='static/custom/js/light7.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='static/custom/js/light7-swiper.min.js' charset='utf-8'></script>
+<script type='text/javascript' src="static/custom/js/progress.js"></script>
+</body>
+</html>
